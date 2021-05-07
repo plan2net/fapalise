@@ -23,23 +23,24 @@ class LinkService extends \TYPO3\CMS\Core\LinkHandling\LinkService
         if (is_numeric($linkParameter)) {
             return [
                 'type' => 'page',
-                'pageuid' => (int)$linkParameter
+                'pageuid' => $linkParameter
             ];
         }
 
         if (($pageId = str_replace('t3://page?uid=', '', $linkParameter)) && is_numeric($pageId)) {
             return [
                 'type' => 'page',
-                'pageuid' => (int)$pageId
+                'pageuid' => $pageId
             ];
         }
 
-        if (([$pageId, $pageType] = explode(',', $linkParameter, 2)) &&
-            is_numeric($pageId) && is_numeric($pageType)) {
+        if (([$pageId, $pageType] = explode(',', $linkParameter, 2))
+            && is_numeric($pageId) && is_numeric($pageType)
+        ) {
             return [
                 'type' => 'page',
-                'pageuid' => (int)$pageId,
-                'pagetype' => (int)$pageType
+                'pageuid' => $pageId,
+                'pagetype' => $pageType
             ];
         }
 
