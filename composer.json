@@ -25,5 +25,10 @@
     "psr-4": {
       "Plan2net\\Fapalise\\": "Classes/"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "fapalise"
+    }
   }
 }
