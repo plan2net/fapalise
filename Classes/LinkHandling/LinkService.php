@@ -1,12 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Plan2net\Fapalise\LinkHandling;
 
+use function explode;
+use function is_numeric;
+use function str_replace;
+
 /**
  * Class LinkService
  *
- * @package Plan2net\LinkHandling
  * @author Wolfgang Klinger <wk@plan2.net>
  */
 class LinkService extends \TYPO3\CMS\Core\LinkHandling\LinkService
@@ -14,9 +18,6 @@ class LinkService extends \TYPO3\CMS\Core\LinkHandling\LinkService
     /**
      * If the given parameter is numeric it's nothing else than a page,
      * so we just return that information
-     *
-     * @param string $linkParameter
-     * @return array
      */
     public function resolve(string $linkParameter): array
     {
