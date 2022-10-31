@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Plan2net\Fapalise\LinkHandling;
 
+use Exception;
 use function explode;
 use function is_numeric;
 use function str_replace;
@@ -35,14 +36,16 @@ class LinkService extends \TYPO3\CMS\Core\LinkHandling\LinkService
             ];
         }
 
-        if (([$pageId, $pageType] = explode(',', $linkParameter, 2))
-            && is_numeric($pageId) && is_numeric($pageType)
-        ) {
-            return [
-                'type' => 'page',
-                'pageuid' => $pageId,
-                'pagetype' => $pageType
-            ];
+        try {
+            [$pageId, $pageType] = explode(',', $linkParameter, 2);
+            if (is_numeric($pageId) && is_numeric($pageType)) {
+                return [
+                    'type' => 'page',
+                    'pageuid' => $pageId,
+                    'pagetype' => $pageType,
+                ];
+            }
+        } catch (Exception $e) {
         }
 
         return parent::resolve($linkParameter);
